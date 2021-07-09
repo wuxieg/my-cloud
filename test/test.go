@@ -1,10 +1,15 @@
-package test
+package main
+
+import "fmt"
 
 type People interface {
 	Speak(string) string
 }
 
-type Student struct{}
+type Student struct {
+	id   int
+	name string
+}
 
 func (stu *Student) Speak(think string) (talk string) {
 	if think == "sb" {
@@ -13,4 +18,8 @@ func (stu *Student) Speak(think string) (talk string) {
 		talk = "您好"
 	}
 	return
+}
+
+func main() {
+	fmt.Println(Student{})
 }

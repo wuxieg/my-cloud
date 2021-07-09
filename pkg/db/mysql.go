@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var DB *gorm.DB
@@ -13,7 +14,9 @@ var DB *gorm.DB
 func InitMysql() *gorm.DB {
 	url := createdbURL(viper.GetString("db.username"), viper.GetString("db.password"), viper.GetString("db.host"),
 		viper.GetInt("db.port"), viper.GetString("db.database"))
-	db, err := gorm.Open(mysql.Open(url), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(url), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Silent),
+	})
 	if err != nil {
 		log.Fatal("Database connection failed. Database url: "+url+" error: ", err)
 	} else {
@@ -21,7 +24,6 @@ func InitMysql() *gorm.DB {
 	}
 
 	DB = db
-
 	return db
 }
 

@@ -19,6 +19,8 @@ func (User) TableName() string {
 }
 
 func (u *User) Create() (err error) {
+	u.CreatedAt = time.Now()
+	u.UpdatedAt = time.Now()
 	if err = db2.DB.Create(&u).Error; err != nil {
 		return err
 	}
@@ -59,7 +61,9 @@ func (uq *UserQuery) List(pageParams *request.UserListParams) (users []*User, er
 		offset = (pageParams.Page - 1) * pageParams.Size
 		limit = pageParams.Size
 	}
-	if err := db2.DB.Offset(offset).Limit(limit).Order(pageParams.OrderBy).Find(&users).Error; err != nil {
+	limit = 10
+
+	if err := db2.DB.Offset(offset).Limit(limit).Order("created_at").Find(&users).Error; err != nil {
 		return users, err
 	}
 	return users, nil

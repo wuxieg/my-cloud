@@ -1,7 +1,6 @@
 package request
 
 type UserParams struct {
-	name string
-	id   string
-	uid  string
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }

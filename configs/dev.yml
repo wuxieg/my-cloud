@@ -1,8 +1,8 @@
 App:
   name: ddd
 db:
-  host: 127.0.0.1
+  host: 10.21.2.196
   port: 3306
   database: my_cloud
-  username: root
-  password: QSCqsc123!@#
+  username: my_cloud
+  password: LH@21cn.com
