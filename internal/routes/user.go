@@ -6,10 +6,14 @@ import (
 )
 
 func UserRegister(r *gin.Engine) {
+	userHandler := handler.UserHandler{}
 	users := r.Group("/users")
 	{
-		users.GET("/", handler.Get)
-		users.POST("/", handler.Post)
+		users.GET("/", userHandler.Get)
+		users.POST("/", userHandler.Post)
+		users.PUT("/", userHandler.Put)
+		users.DELETE("/", userHandler.Delete)
+
 	}
 
 }

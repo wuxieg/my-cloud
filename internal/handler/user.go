@@ -3,27 +3,41 @@ package handler
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	request2 "wangy1.top/my_cloud/internal/handler/request"
+	"github.com/lexkong/log"
+	"wangy1.top/my_cloud/internal/handler/request"
 )
 
-func Get(c *gin.Context) {
+type UserHandler struct {
+}
+
+func (uc *UserHandler) Get(c *gin.Context) {
 	params := c.Params
 	fmt.Println(params)
+
 	c.JSON(200, gin.H{
 		"code":    200,
 		"message": "get success!",
 		"data":    params,
 	})
-
 }
-func Post(c *gin.Context) {
-	var req request2.UserParams
+
+func (uc *UserHandler) Post(c *gin.Context) {
+	var req request.UserParams
 	params := c.ShouldBindJSON(&req)
-	fmt.Println(params)
+	log.Infof("参数：", params)
+	//db.DB.Create(user)
 	c.JSON(200, gin.H{
 		"code":    200,
 		"message": "post success!",
 		"data":    req,
 	})
+
+}
+
+func (uc *UserHandler) Put(c *gin.Context) {
+
+}
+
+func (uc *UserHandler) Delete(c *gin.Context) {
 
 }

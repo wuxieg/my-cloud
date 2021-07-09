@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"wangy1.top/my_cloud/configs"
+	"wangy1.top/my_cloud/internal/model"
 	"wangy1.top/my_cloud/internal/routes"
 )
 
@@ -12,7 +13,7 @@ func main() {
 
 	configs.InitConfig()
 	r := gin.Default()
-
+	model.SetupDb()
 	//路由注册
 	routes.RouterRegister(r)
 
