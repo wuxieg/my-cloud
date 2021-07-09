@@ -10,13 +10,17 @@ import (
 )
 
 func main() {
-
+	// 配置读取
 	configs.InitConfig()
+
+	// 默认路由
 	r := gin.Default()
+	// model 对象注入
 	model.SetupDb()
 	//路由注册
 	routes.RouterRegister(r)
 
+	// server start
 	err := r.Run("0.0.0.0:" + viper.GetString("App.port"))
 	if err != nil {
 		fmt.Println("http server start error!")

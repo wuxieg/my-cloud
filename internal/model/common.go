@@ -10,7 +10,8 @@ func SetupDb() *gorm.DB {
 	db := db2.InitMysql()
 
 	err := db.AutoMigrate(
-		User{})
+		&User{}, &Role{})
+
 	if err != nil {
 		log.Fatal("db autoMigrate error", err)
 		return nil
